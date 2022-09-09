@@ -9,7 +9,7 @@ namespace MeltySynthVst
         private Synthesizer synthesizer = new Synthesizer("TimGM6mb.sf2", 44100);
         private List<MidiMessage> messages = new List<MidiMessage>();
 
-        internal Synthesizer Synthesizer => synthesizer!;
+        internal Synthesizer Synthesizer => synthesizer;
 
         internal void ClearMessages()
         {
