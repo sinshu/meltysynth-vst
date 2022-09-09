@@ -20,7 +20,7 @@ namespace MeltySynthVst
 
         public override void Process(VstAudioBuffer[] inChannels, VstAudioBuffer[] outChannels)
         {
-            synthManager.Synthesizer.Render(outChannels[0].AsSpan(), outChannels[1].AsSpan());
+            synthManager.Render(outChannels[0].AsSpan(), outChannels[1].AsSpan());
         }
     }
 }

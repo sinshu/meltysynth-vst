@@ -22,6 +22,8 @@ namespace MeltySynthVst
 
         public void Process(VstEventCollection events)
         {
+            synthManager.ClearMessages();
+
             foreach (VstEvent evnt in events)
             {
                 if (evnt.EventType == VstEventTypes.MidiEvent)
@@ -33,7 +35,7 @@ namespace MeltySynthVst
                     var data1 = midiEvent.Data[1];
                     var data2 = midiEvent.Data[2];
 
-                    synthManager.Synthesizer.ProcessMidiMessage(channel, command, data1, data2);
+                    synthManager.PushMessage(midiEvent.DeltaFrames, channel, command, data1, data2);
                 }
             }
         }
