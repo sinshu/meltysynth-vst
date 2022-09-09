@@ -8,10 +8,6 @@ namespace MeltySynthVst
     {
         private readonly SynthManager synthManager;
 
-        /// <summary>
-        /// Constructs a new instance.
-        /// </summary>
-        /// <param name="plugin"></param>
         public MidiProcessor(SynthManager synthManager)
         {
             if (synthManager == null)
