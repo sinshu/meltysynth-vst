@@ -18,8 +18,6 @@ namespace MeltySynthVst
             this.synthManager = synthManager;
         }
 
-        public int ChannelCount => 16;
-
         public void Process(VstEventCollection events)
         {
             synthManager.ClearMessages();
@@ -39,5 +37,7 @@ namespace MeltySynthVst
                 }
             }
         }
+
+        public int ChannelCount => 16;
     }
 }

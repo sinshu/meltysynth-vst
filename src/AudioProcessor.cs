@@ -22,5 +22,11 @@ namespace MeltySynthVst
         {
             synthManager.Render(outChannels[0].AsSpan(), outChannels[1].AsSpan());
         }
+
+        public override float SampleRate
+        {
+            get => synthManager.SampleRate;
+            set => synthManager.SampleRate = (int)value;
+        }
     }
 }

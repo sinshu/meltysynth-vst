@@ -6,10 +6,10 @@ namespace MeltySynthVst
 {
     internal sealed class SynthManager
     {
-        private Synthesizer synthesizer = new Synthesizer("TimGM6mb.sf2", 44100);
+        private SoundFont soundFont = new SoundFont("TimGM6mb.sf2");
         private List<MidiMessage> messages = new List<MidiMessage>();
 
-        internal Synthesizer Synthesizer => synthesizer;
+        private Synthesizer? synthesizer;
 
         internal void ClearMessages()
         {
@@ -28,13 +28,21 @@ namespace MeltySynthVst
             foreach (var msg in messages)
             {
                 var count = msg.Delta - start;
-                synthesizer.Render(left.Slice(start, count), right.Slice(start, count));
-                synthesizer.ProcessMidiMessage(msg.Channel, msg.Command, msg.Data1, msg.Data2);
+                synthesizer!.Render(left.Slice(start, count), right.Slice(start, count));
+                synthesizer!.ProcessMidiMessage(msg.Channel, msg.Command, msg.Data1, msg.Data2);
                 start = msg.Delta;
             }
 
-            synthesizer.Render(left.Slice(start), right.Slice(start));
+            synthesizer!.Render(left.Slice(start), right.Slice(start));
         }
+
+        internal int SampleRate
+        {
+            get => synthesizer!.SampleRate;
+            set => synthesizer = new Synthesizer(soundFont, value);
+        }
+
+
 
         private struct MidiMessage
         {
