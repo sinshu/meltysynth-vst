@@ -1,15 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 using MeltySynth;
 
 namespace MeltySynthVst
 {
     internal sealed class SynthManager
     {
-        private SoundFont soundFont = new SoundFont("TimGM6mb.sf2");
+        private SoundFont soundFont = new SoundFont(GetSoundFontPath());
         private List<MidiMessage> messages = new List<MidiMessage>();
 
         private Synthesizer? synthesizer;
+
+        internal static string GetSoundFontPath()
+        {
+            var directory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+            if (directory == null)
+            {
+                throw new Exception("Failed to load the SoundFont.");
+            }
+
+            return Path.Combine(directory, "TimGM6mb.sf2");
+        }
 
         internal void ClearMessages()
         {
